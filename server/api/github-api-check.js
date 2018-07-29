@@ -6,7 +6,7 @@ const lastWeek = new Date(Date.now() - (86400000 * 7))
 const lastWeekISO = lastWeek.toISOString().split("T")[0]
 
 const frameworkLinks = ['facebook/react', 'angular/angular.js', 'vuejs/vue', 'emberjs/ember.js']
-const frameworkNames = ['react', 'angular.js', 'vuejs', 'ember.js']
+const frameworkNames = ['react.js', 'angular.js', 'vuejs', 'ember.js']
 
 
 const updateFramework = {}
@@ -63,9 +63,7 @@ const getGitHubData = async () => {
     })
   })
 
-  const updatedFrameWorks = Promise.all(updateFrameworkPromises)
 
-  console.log("my updated frameworks", updatedFrameWorks)
 
   // console.log("resolved push promises", resolvedPushPromises)
 
