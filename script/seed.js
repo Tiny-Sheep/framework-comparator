@@ -1,18 +1,30 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const { User, Framework } = require('../server/db/models')
+
+
 
 async function seed() {
-  await db.sync({force: true})
+  await db.sync({ force: true })
   console.log('db synced!')
 
+
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({ email: 'cody@email.com', password: '123' }),
+    User.create({ email: 'murphy@email.com', password: '123' })
   ])
 
+  const frameworks = await Promise.all([
+    Framework.create({ name: "ember.js", watchers: 0, issues: 0, pushes: 0 }),
+    Framework.create({ name: "vuejs", watchers: 0, issues: 0, pushes: 0 }),
+    Framework.create({ name: "react", watchers: 0, issues: 0, pushes: 0 }),
+    Framework.create({ name: "angular.js", watchers: 0, issues: 0, pushes: 0 })
+  ])
+
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${frameworks.length} frameworks`)
   console.log(`seeded successfully`)
 }
 

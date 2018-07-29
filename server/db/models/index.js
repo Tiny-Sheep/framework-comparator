@@ -1,14 +1,11 @@
 const User = require('./user')
-const Vote = require('./vote')
-
+const Framework = require('./framework')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
  *
  *    BlogPost.belongsTo(User)
  */
-Vote.belongsTo(User)
-User.hasOne(Vote)
 
 
 /**
@@ -19,6 +16,6 @@ User.hasOne(Vote)
  */
 module.exports = {
   User,
-  Vote
+  Framework
 }
 
