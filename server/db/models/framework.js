@@ -20,10 +20,6 @@ const Framework = db.define('framework', {
   pushes: {
     type: Sequelize.INTEGER,
     defaultValue: 0
-  },
-  votes: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
   }
 
 })

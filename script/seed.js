@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const { User, Framework } = require('../server/db/models')
+const { Vote, Framework } = require('../server/db/models')
 
 
 
@@ -10,20 +10,34 @@ async function seed() {
   console.log('db synced!')
 
 
-  const users = await Promise.all([
-    User.create({ email: 'cody@email.com', password: '123' }),
-    User.create({ email: 'murphy@email.com', password: '123' })
+  const Votes = await Promise.all([
+    Vote.create({ email: 'cody@email.com', }),
+    Vote.create({ email: 'laminey@email.com', }),
+    Vote.create({ email: 'mo@email.com', }),
+    Vote.create({ email: 'murphy@email.com', })
   ])
 
   const frameworks = await Promise.all([
-    Framework.create({ name: "ember.js", watchers: 0, issues: 0, pushes: 0 }),
-    Framework.create({ name: "vuejs", watchers: 0, issues: 0, pushes: 0 }),
-    Framework.create({ name: "react", watchers: 0, issues: 0, pushes: 0 }),
-    Framework.create({ name: "angular.js", watchers: 0, issues: 0, pushes: 0 })
+    Framework.create({ name: "react", watchers: 0, issues: 0, pushes: 0, votes: 0 }),
+    Framework.create({ name: "angular.js", watchers: 0, issues: 0, pushes: 0, votes: 0 }),
+    Framework.create({ name: "vuejs", watchers: 0, issues: 0, pushes: 0, votes: 0 }),
+    Framework.create({ name: "ember.js", watchers: 0, issues: 0, pushes: 0, votes: 0 }),
   ])
 
+  const voteInst = await Vote.findAll()
+  const frameworkInst = await Framework.findAll()
 
-  console.log(`seeded ${users.length} users`)
+  await Promise.all(voteInst.map((vote, idx) => {
+    return vote.setFramework(frameworkInst[idx])
+  }))
+
+  // await Promise.all()
+
+
+
+
+
+  console.log(`seeded ${Votes.length} votes`)
   console.log(`seeded ${frameworks.length} frameworks`)
   console.log(`seeded successfully`)
 }
